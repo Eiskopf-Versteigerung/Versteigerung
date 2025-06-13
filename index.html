@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zwangsversteigerungs-Demo</title>
+  <title>Zwangsversteigerungs-Demo (NRW)</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; }
     .btn { margin-right: 8px; padding: 8px 16px; cursor: pointer; }
@@ -12,7 +11,7 @@
     .text-lg { font-size: 1.125rem; }
     .font-semibold { font-weight: 600; }
     .text-blue-600 { color: #2563eb; }
-    .hover\:underline:hover { text-decoration: underline; }
+    .hover\\:underline:hover { text-decoration: underline; }
   </style>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
@@ -29,28 +28,31 @@
       amtsgericht: "AG Köln",
       adresse: "Venloer Straße 210, 50823 Köln",
       objektart: "ETW (Wohnung)",
+      wohnflaeche: "65 m²",
       grundstueck: "74 m²",
       verkehrswert: "221.000 €",
       termin: "18.06.2025, 09:30 Uhr",
-      expose: "https://zvg-portal.de/expose/koeln123",
+      expose: "https://zvg-portal.de/expose/koeln123.pdf",
     },
     {
       amtsgericht: "AG Düsseldorf",
       adresse: "Mörsenbroicher Weg 25, 40470 Düsseldorf",
       objektart: "EFH (Einfamilienhaus)",
+      wohnflaeche: "120 m²",
       grundstueck: "430 m²",
       verkehrswert: "312.000 €",
       termin: "28.06.2025, 10:00 Uhr",
-      expose: "https://zvg-portal.de/expose/duesseldorf456",
+      expose: "https://zvg-portal.de/expose/duesseldorf456.pdf",
     },
     {
       amtsgericht: "AG Dortmund",
       adresse: "Kuckelke 12, 44135 Dortmund",
       objektart: "DHH (Doppelhaushälfte)",
+      wohnflaeche: "105 m²",
       grundstueck: "365 m²",
       verkehrswert: "275.000 €",
       termin: "02.07.2025, 11:00 Uhr",
-      expose: "https://zvg-portal.de/expose/dortmund789",
+      expose: "https://zvg-portal.de/expose/dortmund789.pdf",
     },
   ];
 
@@ -77,7 +79,8 @@
             <div key={idx} className="card">
               <h2 className="text-lg font-semibold">{item.amtsgericht}</h2>
               <p>📍 {item.adresse}</p>
-              <p>🔹 {item.objektart}, Grundstück: {item.grundstueck}</p>
+              <p>🔹 {item.objektart}</p>
+              <p>🔹 Wohnfläche: {item.wohnflaeche}, Grundstück: {item.grundstueck}</p>
               <p>🔹 Verkehrswert: {item.verkehrswert}</p>
               <p>🔹 Termin: {item.termin}</p>
               <a href={item.expose} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
