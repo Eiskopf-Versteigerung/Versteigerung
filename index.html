@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zwangsversteigerungs-Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .btn { margin-right: 8px; padding: 8px 16px; cursor: pointer; }
+    .card { border: 1px solid #ccc; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .text-lg { font-size: 1.125rem; }
+    .font-semibold { font-weight: 600; }
+    .text-blue-600 { color: #2563eb; }
+    .hover\:underline:hover { text-decoration: underline; }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+  const { useState } = React;
+
+  const demoData = [
+    {
+      amtsgericht: "AG Köln",
+      adresse: "Venloer Straße 210, 50823 Köln",
+      objektart: "ETW (Wohnung)",
+      grundstueck: "74 m²",
+      verkehrswert: "221.000 €",
+      termin: "18.06.2025, 09:30 Uhr",
+      expose: "https://zvg-portal.de/expose/koeln123",
+    },
+    {
+      amtsgericht: "AG Düsseldorf",
+      adresse: "Mörsenbroicher Weg 25, 40470 Düsseldorf",
+      objektart: "EFH (Einfamilienhaus)",
+      grundstueck: "430 m²",
+      verkehrswert: "312.000 €",
+      termin: "28.06.2025, 10:00 Uhr",
+      expose: "https://zvg-portal.de/expose/duesseldorf456",
+    },
+    {
+      amtsgericht: "AG Dortmund",
+      adresse: "Kuckelke 12, 44135 Dortmund",
+      objektart: "DHH (Doppelhaushälfte)",
+      grundstueck: "365 m²",
+      verkehrswert: "275.000 €",
+      termin: "02.07.2025, 11:00 Uhr",
+      expose: "https://zvg-portal.de/expose/dortmund789",
+    },
+  ];
+
+  function ZwangsversteigerungDemo() {
+    const [filter, setFilter] = useState("Alle");
+    const filteredData =
+      filter === "Alle"
+        ? demoData
+        : demoData.filter((item) => item.amtsgericht.includes(filter));
+
+    return (
+      <div className="p-6 space-y-4">
+        <h1 className="text-2xl font-bold">📬 Zwangsversteigerungs-Demo (NRW)</h1>
+
+        <div className="flex space-x-2">
+          <button onClick={() => setFilter("Alle")} className="btn">Alle</button>
+          <button onClick={() => setFilter("Köln")} className="btn">Köln</button>
+          <button onClick={() => setFilter("Düsseldorf")} className="btn">Düsseldorf</button>
+          <button onClick={() => setFilter("Dortmund")} className="btn">Dortmund</button>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          {filteredData.map((item, idx) => (
+            <div key={idx} className="card">
+              <h2 className="text-lg font-semibold">{item.amtsgericht}</h2>
+              <p>📍 {item.adresse}</p>
+              <p>🔹 {item.objektart}, Grundstück: {item.grundstueck}</p>
+              <p>🔹 Verkehrswert: {item.verkehrswert}</p>
+              <p>🔹 Termin: {item.termin}</p>
+              <a href={item.expose} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                📎 Exposé öffnen
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<ZwangsversteigerungDemo />);
+  </script>
+</body>
+</html>
